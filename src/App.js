@@ -3,7 +3,7 @@ import "./App.css";
 import InputBox from "./components/InputBox";
 import PhoneList from "./components/PhoneList";
 import styled from "styled-components";
-import {dummyData} from "./lib/dummyData.js";
+import {dummyData, nextId, setNextId} from "./lib/dummyData.js";
 
 const PhoneWrapper = styled.div`    
   display : flex;
@@ -14,13 +14,56 @@ const PhoneWrapper = styled.div`
 
 
 class App extends React.Component{
-  state = dummyData;
+  
+  state = {
+    dummyData,
+    name:"",
+    phone:""
+  };
+
+
+  
+
+
+  handleInput = e => {
+    this.setState({
+      [e.target.name]:e.target.value
+    })
+  }
+
+  handleSubmit = () => {
+    const { dummyData, name, phone } = this.state;
+
+    if (name === "" || phone === "") return;
+
+    this.setState({
+      dummyData: {
+        ...dummyData,
+        [nextId]: {
+          id: nextId,
+          name,
+          phone
+        }
+      },
+      name: "",
+      phone: ""
+    });
+
+    setNextId();
+  };
+
+  handleRemove = id => {
+    const{[id]:_, ...dummyData} = this.state.dummyData
+    this.setState({dummyData})
+  }
+
 
   render(){
     return(
       <PhoneWrapper>
-        <InputBox />
-        <PhoneList list={this.state}/>
+        <InputBox name={this.state.name} phone={this.state.phone}
+        onChange={this.handleInput} onSubmit={this.handleSubmit}/>
+        <PhoneList list={this.state.dummyData} ondelete={this.handleRemove} />
       </PhoneWrapper>
     );
   }
@@ -107,3 +150,9 @@ export default App;
 //   }
 // }
 // export default App;
+
+
+
+
+
+

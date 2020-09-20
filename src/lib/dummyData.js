@@ -35,3 +35,9 @@ export const dummyData = {
         phone : "010-0000-0002"
     }
 };
+
+export var nextId = Object.keys(dummyData).length;
+
+export const setNextId = () => {
+    nextId++
+};

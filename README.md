@@ -33,3 +33,8 @@
 ### react hooks & react Redux
 ### Django backend연결
 ### aws 시간되면 한번 해봅시다.
+
+# 20-09-14
+### react hooks
+
+### react redux

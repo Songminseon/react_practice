@@ -7,11 +7,11 @@ const ListWrapper = styled.div `
   flex-direction: column;
 `;
 
-const PhoneList = ({list}) => {
+const PhoneList = ({list, ondelete}) => {
     return(
         <ListWrapper>
           {Object.values(list).map(item=>
-            <PhoneItem id={item.id} name={item.name} phone={item.phone}/>) }
+            <PhoneItem id={item.id} name={item.name} phone={item.phone} onClick={ondelete}/>) }
         </ListWrapper>
     );
 };
